@@ -8,6 +8,6 @@ class MycontactApplicationTests {
 
     @Test
     void contextLoads() {
-    }
 
+    }
 }

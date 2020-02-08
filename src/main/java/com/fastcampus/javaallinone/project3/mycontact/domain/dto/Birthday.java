@@ -10,9 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class Birthday {
-    private int yearOfBirthday;
-    private int monthOfBirthday;
-    private int dayOfBirthday;
+    private Integer yearOfBirthday;
+    private Integer monthOfBirthday;
+    private Integer dayOfBirthday;
 
     public Birthday(LocalDate birthday) {
         this.yearOfBirthday = birthday.getYear();
