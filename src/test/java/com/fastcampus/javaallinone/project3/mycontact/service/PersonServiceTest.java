@@ -2,6 +2,7 @@ package com.fastcampus.javaallinone.project3.mycontact.service;
 
 import com.fastcampus.javaallinone.project3.mycontact.domain.Block;
 import com.fastcampus.javaallinone.project3.mycontact.domain.Person;
+import com.fastcampus.javaallinone.project3.mycontact.domain.dto.Birthday;
 import com.fastcampus.javaallinone.project3.mycontact.repository.BlockRepository;
 import com.fastcampus.javaallinone.project3.mycontact.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,7 @@ class PersonServiceTest {
         givenPerson("benny", 6, "A", LocalDate.of(1995, 8, 30));
 
         List<Person> result = personRepository
-                .findByBirthdayBetween(LocalDate.of(1991, 8, 1), LocalDate.of(1995, 8, 31));
+                .findByMonthOfBirthday(8);
 
         result.forEach(System.out::println);
     }
@@ -116,7 +117,7 @@ class PersonServiceTest {
 
     private void givenPerson(String name, int age, String bloodType, LocalDate birthday) {
         Person person = new Person(name, age, bloodType);
-        person.setBirthday(birthday);
+        person.setBirthday(new Birthday(birthday));
 
         personRepository.save(person);
     }
