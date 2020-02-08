@@ -5,8 +5,8 @@ import com.fastcampus.javaallinone.project3.mycontact.repository.PersonRepositor
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,7 +19,7 @@ public class PersonService {
         return personRepository.findByBlockIsNull();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Person getPerson(Long id) {
         Person person = personRepository.findById(id).orElse(null);
 
@@ -30,5 +30,10 @@ public class PersonService {
 
     public List<Person> getPeopleByName(String name) {
         return personRepository.findByName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public void put(Person person) {
+        personRepository.save(person);
     }
 }
