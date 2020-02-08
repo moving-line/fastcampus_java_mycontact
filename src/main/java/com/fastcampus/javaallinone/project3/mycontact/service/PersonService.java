@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -17,9 +16,7 @@ public class PersonService {
     private PersonRepository personRepository;
 
     public List<Person> getPeopleExcludeBlocks() {
-        List<Person> people = personRepository.findAll();
-
-        return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());
+        return personRepository.findByBlockIsNull();
     }
 
     @Transactional
@@ -29,5 +26,9 @@ public class PersonService {
         log.info("person : {}", person);
 
         return person;
+    }
+
+    public List<Person> getPeopleByName(String name) {
+        return personRepository.findByName(name);
     }
 }
