@@ -18,4 +18,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     // nativeQuery = true 로 설정시 => "SELECT * FROM person WHERE month_of_birthday = :monthOfBirthday" 처럼 진짜 쿼리 가능
     // 아래 메서드의 인자 앞에 @Param("monthOfBirthday") 을 선언하면 = ?1 대신에 = :monthOfBirthday 으로 사용할 수 있음.
     List<Person> findByMonthOfBirthday(int monthOfBirthday);
+
+    @Query(value = "SELECT * FROM person WHERE person.deleted = true", nativeQuery = true)
+    List<Person> findPeopleDeleted();
 }
