@@ -22,7 +22,6 @@ class HelloWorldControllerTest {
     @Test
     void helloWorld() {
         System.out.println(helloWorldController.helloWorld());
-
         assertThat(helloWorldController.helloWorld()).isEqualTo("HelloWorld");
     }
 

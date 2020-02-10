@@ -16,10 +16,6 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public List<Person> getPeopleExcludeBlocks() {
-        return personRepository.findByBlockIsNull();
-    }
-
     @Transactional(readOnly = true)
     public Person getPerson(Long id) {
         Person person = personRepository.findById(id).orElse(null);
