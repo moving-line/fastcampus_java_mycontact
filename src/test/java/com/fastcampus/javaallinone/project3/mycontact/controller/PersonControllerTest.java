@@ -196,6 +196,20 @@ class PersonControllerTest {
         assertThat(personRepository.findPeopleDeleted().stream().anyMatch(person -> person.getId().equals(1L))).isTrue();
     }
 
+    @Test
+    void getAll() throws Exception {
+        mockMvc.perform(get("/api/person/")
+                .param("page", "1")
+                .param("size", "2")
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.numberOfElements").value(2))
+                .andExpect(jsonPath("$.totalPages").value(3))
+                .andExpect(jsonPath("$.totalElements").value(6))
+                .andExpect(jsonPath("$.content.[0].name").value("dennis"))
+                .andExpect(jsonPath("$.content.[1].name").value("sophia"));
+    }
+
     private String toJsonString(PersonDto personDto) throws JsonProcessingException {
         return objectMapper.writeValueAsString(personDto);
     }
